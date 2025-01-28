@@ -25,4 +25,4 @@ def register_user(user_data: UserCreate, user_service: UserService = Depends(get
 @auth_router.post('/login/')
 def login(user_data: Annotated[OAuth2PasswordRequestForm, Depends()], user_service: UserService = Depends(get_user_service)):
     current_token = user_service.get_jwt_token(user_data)
-    return current_token
+    return {'access_token': current_token}
