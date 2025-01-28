@@ -1,5 +1,7 @@
 from app.api.schemas.users import UserCreate, UserFromDB
 from app.utils.uow import IUnitOfWork
+from fastapi import HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from app.core.security import create_token
 
 
@@ -19,3 +21,15 @@ class UserService:
         with self.uow:
             user_result = self.uow.user.get_one_by_name(username)
             return user_result
+    
+    def get_jwt_token(self, data: OAuth2PasswordRequestForm):
+        with self.uow:
+            user_from_db = self.uow.user.get_one_by_name(data.username)
+            if user_from_db is None or user_from_db.password != data.password:
+                raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+            current_token = create_token({"sub": data.username})
+            return current_token
