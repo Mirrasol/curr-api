@@ -13,9 +13,6 @@ class Base(DeclarativeBase):
     pass
 
 
-def get_db():
-    session = session_maker()
-    try:
+def get_session():
+    with session_maker() as session:
         yield session
-    finally:
-        session.close()
