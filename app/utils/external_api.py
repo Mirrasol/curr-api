@@ -1,7 +1,7 @@
 import httpx
 from app.core.config import get_settings
 from app.api.schemas.currency import Currency
-from app.utils.exception_handlers import InvalidCurrencyException, ExternalAPIException
+from app.core.exception_handlers import InvalidCurrencyException, ExternalAPIException
 
 settings = get_settings()
 

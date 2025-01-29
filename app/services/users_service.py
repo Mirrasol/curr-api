@@ -3,7 +3,7 @@ from app.utils.uow import IUnitOfWork
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from app.core.security import create_token
-from app.utils.exception_handlers import InvalidCredentialsException, UserExistsException
+from app.core.exception_handlers import InvalidCredentialsException, UserExistsException
 
 
 class UserService:
