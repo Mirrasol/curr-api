@@ -1,6 +1,5 @@
 from app.api.schemas.users import UserCreate, UserFromDB
 from app.utils.uow import IUnitOfWork
-from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from app.core.security import create_token
 from app.core.exception_handlers import InvalidCredentialsException, UserExistsException
