@@ -4,6 +4,7 @@ from sqlalchemy import select, insert
 
 
 class AbstractRepository(ABC):
+    """An abstract repository interface with basic methods"""
     @abstractmethod
     def add_one(self, data: dict):
         raise NotImplementedError
@@ -18,6 +19,7 @@ class AbstractRepository(ABC):
 
 
 class AlchemyRepository(AbstractRepository):
+    """Realization of the abstract repository for SQLAlchemy"""
     model = None
 
     def __init__(self, session: Session):

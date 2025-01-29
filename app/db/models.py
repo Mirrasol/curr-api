@@ -5,6 +5,7 @@ import datetime
 
 
 class User(Base):
+    """User model from the database"""
     __tablename__ = 'user'
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, index=True)

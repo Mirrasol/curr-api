@@ -10,6 +10,7 @@ settings = get_settings()
 
 
 def create_token(data: dict):
+    """Creating a JWT token"""
     to_encode = data.copy()
     expire = datetime.now() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({'exp': expire})
@@ -18,6 +19,7 @@ def create_token(data: dict):
 
 
 def decode_token(token: str = Depends(oauth2_scheme)):
+    """Decode a JWT token to get its data"""
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         return payload
@@ -36,4 +38,5 @@ def decode_token(token: str = Depends(oauth2_scheme)):
 
 
 def get_user_from_token(payload: dict = Depends(decode_token)):
+    """Get user data from a JWT token payload"""
     return payload.get('sub')

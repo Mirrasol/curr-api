@@ -7,6 +7,7 @@ from app.core.exception_handlers import InvalidCredentialsException, UserExistsE
 
 
 class UserService:
+    """A service to manage user routes"""
     def __init__(self, uow: IUnitOfWork):
         self.uow = uow
 

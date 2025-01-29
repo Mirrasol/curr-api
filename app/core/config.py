@@ -3,6 +3,7 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
+    """Base configuration settings for the project"""
     DB_HOST: str
     DB_PORT: str
     DB_USER: str

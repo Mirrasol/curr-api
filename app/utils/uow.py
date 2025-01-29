@@ -4,6 +4,7 @@ from app.repositories.users_repository import UserRepository
 
 
 class IUnitOfWork(ABC):
+    """Abstract Unit of Work interface with the list of repositories"""
     user: UserRepository
 
     @abstractmethod
@@ -24,6 +25,7 @@ class IUnitOfWork(ABC):
 
 
 class UnitOfWork(IUnitOfWork):
+    """Base Unit of Work interface for session management"""
     def __init__(self):
         self.session_factory = session_maker
 

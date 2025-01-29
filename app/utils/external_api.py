@@ -7,6 +7,7 @@ settings = get_settings()
 
 
 def get_currencies_list():
+    """Get the list of available currencies from an external API"""
     url = 'https://api.apilayer.com/currency_data/list'
     headers = {'apikey': settings.API_KEY}
     response_data = httpx.get(url, headers=headers)
@@ -17,6 +18,7 @@ def get_currencies_list():
 
 
 def get_current_exchange_rates(currencies_data: Currency):
+    """Convert currencies using the external API"""
     url = 'https://api.apilayer.com/currency_data/convert'
     params = {
         'from': currencies_data.from_currency,
