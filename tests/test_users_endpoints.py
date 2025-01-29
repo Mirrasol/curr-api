@@ -43,4 +43,5 @@ def test_login_unauthorized():
         data=user_data,
         headers={'Content-Type': 'application/x-www-form-urlencoded'},
         )
-    assert response.status_code != 200
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Invalid credentials"
