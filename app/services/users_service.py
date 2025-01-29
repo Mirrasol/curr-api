@@ -2,6 +2,7 @@ from app.api.schemas.users import UserCreate, UserFromDB
 from app.utils.uow import IUnitOfWork
 from fastapi.security import OAuth2PasswordRequestForm
 from app.core.security import create_token
+from sqlalchemy.exc import NoResultFound
 from app.core.exception_handlers import InvalidCredentialsException, UserExistsException
 
 
@@ -29,8 +30,11 @@ class UserService:
 
     def get_jwt_token(self, data: OAuth2PasswordRequestForm):
         with self.uow:
-            user_from_db = self.uow.user.get_one_by_name(data.username)
-            if user_from_db is None or user_from_db.password != data.password:
+            try:
+                user_from_db = self.uow.user.get_one_by_name(data.username)
+            except (NoResultFound):
+                raise InvalidCredentialsException
+            if user_from_db.password != data.password:
                 raise InvalidCredentialsException
             current_token = create_token({"sub": data.username})
             return current_token
