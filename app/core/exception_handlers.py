@@ -17,5 +17,5 @@ class ExternalAPIException(HTTPException):
 
 
 class InvalidCurrencyException(HTTPException):
-    def __init__(self, detail: str = 'Invalid currency code', status_code: int = 404):
+    def __init__(self, detail: str = 'Invalid currency code', status_code: int = 422):
         super().__init__(status_code=status_code, detail=detail)

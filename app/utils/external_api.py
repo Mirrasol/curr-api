@@ -25,7 +25,7 @@ def get_current_exchange_rates(currencies_data: Currency):
     }
     headers = {'apikey': settings.API_KEY}
     response_data = httpx.get(url, params=params, headers=headers)
-    if response_data.status_code != 200:
-        raise InvalidCurrencyException(status_code=response_data.status_code)
+    if response_data.json()['success'] is False:
+        raise InvalidCurrencyException(status_code=422)
     exchange_result = response_data.json().get('result')
     return exchange_result
