@@ -20,11 +20,13 @@ or set your own virtual environment using pip and other package managers.
 
 Don't for get to create the .env file that contains your secret keys:
 
-`SECRET_KEY = enter_your_key`
-`API_KEY = exchange_api_key` (from `https://apilayer.com/marketplace/currency_data-api`)
-`ALGORITHM = choose_algorithm`
+`SECRET_KEY = enter_your_key` 
+`ALGORITHM = choose_algorithm` 
+`API_KEY = exchange_api_key` 
 
-and database settings (example):
+You can get the API_Key from the external forex API: ["Currency Data API"](https://apilayer.com/marketplace/currency_data-api`).
+
+Fill in the database settings (example):
 
 `DB_HOST = localhost`
 `DB_PORT = 5432`
