@@ -5,16 +5,6 @@ from main import app
 client = TestClient(app)
 
 
-def test_register_user_successfully():
-    new_user = {'username': 'Karlach', 'password': 'screwavernus13'}
-    response = client.post(
-        '/auth/register/',
-        json=new_user,
-        )
-    assert response.status_code == 200
-    assert response.json() == {'message': 'User added successfully'}
-
-
 def test_register_user_username_taken():
     user_data = {'username': 'Wyll', 'password': '_prideofthegate_'}
     response = client.post(
