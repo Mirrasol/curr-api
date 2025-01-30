@@ -1,12 +1,16 @@
 import pytest
 from fastapi.testclient import TestClient
+from app.core.hash import get_password_hash
 from main import app
 
 client = TestClient(app)
 
 
 def test_register_user_username_taken():
-    user_data = {'username': 'Wyll', 'password': '_prideofthegate_'}
+    user_data = {
+        'username': 'Wyll',
+        'password': '_prideofthegate_',
+    }
     response = client.post(
         '/auth/register/',
         json=user_data,
@@ -16,7 +20,10 @@ def test_register_user_username_taken():
 
 
 def test_login_successfully():
-    user_data = new_user = {'username': 'Wyll', 'password': '_prideofthegate_'}
+    user_data = new_user = {
+        'username': 'Wyll',
+        'password': '_prideofthegate_',
+    }
     response = client.post(
         '/auth/login/',
         data=user_data,
@@ -27,7 +34,7 @@ def test_login_successfully():
 
 
 def test_login_unauthorized():
-    user_data = new_user = {'username': 'Gortash', 'password': 'edictofBane'}
+    user_data = {'username': 'Gortash', 'password': 'edictofBane'}
     response = client.post(
         '/auth/login/',
         data=user_data,
